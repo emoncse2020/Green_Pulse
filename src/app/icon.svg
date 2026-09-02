@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <rect width="24" height="24" rx="5.5" fill="#047857"/>
+  <g transform="translate(2.4 2.4) scale(0.8)">
+    <mask id="gp">
+      <path d="M12 2C17 7 19 10 19 12c0 3.5-3 7.5-7 10-4-2.5-7-6.5-7-10 0-2 2-5 7-10Z" fill="white"/>
+      <path d="M6 12.6h2.6l1.7-3.9 2.6 6.6 1.6-2.7H18" fill="none" stroke="black"
+            stroke-width="3.9" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+    <path d="M6 12.6h2.6l1.7-3.9 2.6 6.6 1.6-2.7H18" fill="none" stroke="#ecfccb"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2C17 7 19 10 19 12c0 3.5-3 7.5-7 10-4-2.5-7-6.5-7-10 0-2 2-5 7-10Z"
+          fill="#ecfccb" mask="url(#gp)"/>
+  </g>
+</svg>
