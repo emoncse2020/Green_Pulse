@@ -108,7 +108,7 @@ export async function updateAdminProfile(name: string, bio: string) {
 
 export async function changePassword(currentPassword: string, newPassword: string) {
   try {
-    const response = await fetchServer("/admin/password", {
+    const response = await fetchServer("/auth/change-password", {
       method: "PATCH",
       body: JSON.stringify({ currentPassword, newPassword }),
     });

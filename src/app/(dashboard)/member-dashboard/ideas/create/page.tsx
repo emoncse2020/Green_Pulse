@@ -61,12 +61,18 @@ export default function CreateIdeaPage() {
   const isPaid = watch("isPaid");
 
   const createIdeaMutation = useMutation({
-    mutationFn: async (data: any) => {
-      return api.post("/ideas", data);
+    mutationFn: async ({ payload, isDraft }: { payload: any; isDraft: boolean }) => {
+      // The server always creates an idea as DRAFT and ignores any status in the
+      // body, so submitting for review is a second call to the submit route.
+      const created: any = await api.post("/ideas", payload);
+      if (!isDraft) {
+        await api.patch(`/ideas/${created.data.id}/submit`);
+      }
+      return created;
     },
     onSuccess: (_, variables) => {
       toast.success(
-        variables.status === "DRAFT"
+        variables.isDraft
           ? "Idea saved as draft"
           : "Idea submitted for review!",
       );
@@ -78,11 +84,10 @@ export default function CreateIdeaPage() {
   const onSubmit: any = (data: IdeaForm, isDraft: boolean) => {
     const payload = {
       ...data,
-      status: isDraft ? "DRAFT" : "UNDER_REVIEW",
       images: data.images ? [data.images] : [],
       price: data.isPaid ? data.price : null,
     };
-    createIdeaMutation.mutate(payload);
+    createIdeaMutation.mutate({ payload, isDraft });
   };
 
   const handleDraftSubmit = handleSubmit((data) => onSubmit(data, true));
